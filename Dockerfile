@@ -18,6 +18,5 @@ RUN apt-get update && \
     pg_ctlcluster 9.5 main stop && \
     adduser --system --uid 1001 digabi && \
     curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | sudo -u digabi bash && \
-    sudo -u digabi bash -c '. /home/digabi/.nvm/nvm.sh && nvm install 8.11.3 && nvm install 11.11.0 && nvm install 12.4.0 && nvm install 12.6.0 && nvm install 12.7.0' && \
-    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 8.11.3 11.11.0 12.4.0 12.6.0 12.7.0; do nvm exec $v npm install -g yarn; done' && \
+    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 8.11.3 12.4.0 12.6.0 12.7.0; do nvm install $v; nvm exec $v npm install -g yarn; done' && \
     gem install fpm
