@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 RUN apt-get update && \
-    apt-get -y install gnupg jq ca-certificates curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make bsdtar latexmk texlive-latex-recommended texlive-latex-extra\
+    apt-get -y install gnupg jq ca-certificates cmake curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make bsdtar latexmk texlive-latex-recommended texlive-latex-extra\
     netcat-traditional ruby ruby-dev sudo && \
     curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add - && \
     echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
