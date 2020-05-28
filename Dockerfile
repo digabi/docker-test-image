@@ -1,14 +1,14 @@
 FROM debian:stretch
 
 RUN apt-get update && \
-    apt-get -y install gnupg jq ca-certificates curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make bsdtar latexmk texlive-latex-recommended texlive-latex-extra\
+    apt-get -y install gnupg jq ca-certificates cmake curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make bsdtar latexmk texlive-latex-recommended texlive-latex-extra\
     netcat-traditional ruby ruby-dev sudo && \
     curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add - && \
     echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
     echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list && \
     apt-get update && \
     apt-get -y install google-chrome-unstable postgresql-9.6 postgresql-contrib-9.6 postgresql-server-dev-9.6 && \
-    apt-get -y install -t stretch-backports golang cmake && \
+    apt-get -y install -t stretch-backports golang && \
     rm -rf /var/lib/apt/lists/* && \
     echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     locale-gen && \
