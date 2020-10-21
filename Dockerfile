@@ -2,7 +2,7 @@ FROM debian:stretch
 
 RUN apt-get update && \
     apt-get -y install gnupg jq ca-certificates cmake curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make bsdtar latexmk texlive-latex-recommended texlive-latex-extra\
-    netcat-traditional ruby ruby-dev sudo && \
+    netcat-traditional ruby ruby-dev sudo libsystemd-dev && \
     curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add - && \
     echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
     echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/stretch-backports.list && \
