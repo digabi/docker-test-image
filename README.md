@@ -1,10 +1,10 @@
 # docker-test-image
 Docker image for unit tests et al
 
-Built by https://hub.docker.com/r/digabi/docker-test-image/
+Hosted in https://hub.docker.com/r/digabi/docker-test-image/
 
-* stretch version: digabi/docker-test-image:latest built from branch `master`
-* buster version: digabi/docker-test-image:buster built from branch `buster`
+* stretch version: digabi/docker-test-image:latest is built from branch `master`
+* buster version: digabi/docker-test-image:buster is built from branch `buster`
 
 ## Building and publishing stretch image:
 
