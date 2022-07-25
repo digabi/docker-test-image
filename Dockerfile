@@ -21,3 +21,13 @@ RUN apt-get update && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
     sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 14.16.0 16.14.0; do nvm install $v; nvm exec $v npm install -g yarn; done' && \
     gem install fpm
+
+# Install playwright based oni official playwright image
+# https://github.com/microsoft/playwright/blob/main/utils/docker/Dockerfile.focal
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright-agent
+RUN mkdir /ms-playwright-agent && \
+    export PATH=$PATH:/home/digabi/.nvm/versions/node/v16.14.0/bin && \
+    cd /ms-playwright-agent && npm init -y && \
+    npm i playwright && \
+    npx playwright install --with-deps && \
+    rm -rf /ms-playwright-agent
