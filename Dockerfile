@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:11.5
 
 RUN apt-get update && \
     apt-get -y install gnupg jq ca-certificates cmake curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make libarchive-tools latexmk texlive-latex-recommended texlive-latex-extra\
