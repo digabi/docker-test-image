@@ -33,3 +33,10 @@ docker build -t digabi/docker-test-image:bullseye .
 docker login # If not logged in already. See KeePass for digabi Docker Hub credentials
 docker push digabi/docker-test-image:bullseye
 ```
+
+We are moving to ECR instead of Docker Hub. Building and pushing to ECR, using Bullseye as the latest:
+
+git checkout bullseye
+docker build -t 863419159770.dkr.ecr.eu-north-1.amazonaws.com/jenkins-test:latest .
+aws-vault exec ytl-utility -- aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 863419159770.dkr.ecr.eu-north-1.amazonaws.com
+docker push 863419159770.dkr.ecr.eu-north-1.amazonaws.com/jenkins-test:latest
