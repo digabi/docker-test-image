@@ -19,7 +19,7 @@ RUN apt-get update && \
     pg_ctlcluster 13 main stop && \
     adduser --system --uid 1001 --shell /bin/bash digabi && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
-    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 14.16.0 16.14.0; do nvm install $v; nvm exec $v npm install -g yarn; done' && \
+    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 14.16.0 16.14.0 18.17.0; do nvm install $v; nvm exec $v npm install -g yarn; done' && \
     gem install fpm
 
 # Install playwright based oni official playwright image
