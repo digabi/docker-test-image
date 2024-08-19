@@ -9,17 +9,17 @@ RUN curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add -
     echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
     echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/stretch-backports.list && \
     apt-get update && \
-    apt-get -y install google-chrome-unstable postgresql postgresql-contrib postgresql-server-dev-13 && \
+    apt-get -y install google-chrome-unstable postgresql-16 postgresql-contrib-16 postgresql-server-dev-16 && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     locale-gen && \
     ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime && \
-    sed -i 's/md5/trust/' /etc/postgresql/13/main/pg_hba.conf && \
-    echo "TimeZone = 'Europe/Helsinki'" >> /etc/postgresql/13/main/postgresql.conf && \
-    pg_ctlcluster 13 main start && \
+    sed -i 's/md5/trust/' /etc/postgresql/16/main/pg_hba.conf && \
+    echo "TimeZone = 'Europe/Helsinki'" >> /etc/postgresql/16/main/postgresql.conf && \
+    pg_ctlcluster 16 main start && \
     sudo -u postgres psql -c 'CREATE USER digabi WITH SUPERUSER;' && \
-    pg_ctlcluster 13 main stop && \
+    pg_ctlcluster 16 main stop && \
     adduser --system --uid 1001 --shell /bin/bash digabi
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
