@@ -17,7 +17,7 @@ RUN apt-get update && \
 RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     locale-gen && \
     ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime && \
-    sed -i 's/md5/trust/' /etc/postgresql/16/main/pg_hba.conf && \
+    sed -i 's/scram-sha-256/trust/g' /etc/postgresql/16/main/pg_hba.conf && \
     echo "TimeZone = 'Europe/Helsinki'" >> /etc/postgresql/16/main/postgresql.conf && \
     pg_ctlcluster 16 main start && \
     sudo -u postgres psql -c 'CREATE USER digabi WITH SUPERUSER;' && \
