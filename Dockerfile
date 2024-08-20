@@ -1,25 +1,18 @@
 FROM --platform=linux/amd64 debian:11.5
 
-RUN apt-get update
-
-RUN apt-get -y install gnupg jq ca-certificates cmake curl g++ gcc git libx11-dev libffi-dev libnss3-tools locales make libarchive-tools latexmk texlive-latex-recommended texlive-latex-extra \
-    texlive texlive-xetex texlive-lang-european texlive-fonts-recommended texlive-fonts-extra inkscape netcat-traditional ruby ruby-dev sudo libsystemd-dev golang vim cups-ipp-utils binutils
-
-# Install Chrome
-RUN curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add - && \
+RUN apt-get update && apt-get -y install gnupg curl && \
+    curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add - && \
     echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
-    echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/stretch-backports.list
-RUN apt-get update
-RUN apt-get -y install google-chrome-unstable
-
-# Install PostgreSQL
-RUN install -d /usr/share/postgresql-common/pgdg && \
+    echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/stretch-backports.list && \
+    install -d /usr/share/postgresql-common/pgdg && \
     curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc && \
     echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt bullseye-pgdg main' > /etc/apt/sources.list.d/pgdg.list
-RUN apt-get update
-RUN apt-get -y install postgresql-16 postgresql-contrib-16 postgresql-server-dev-16
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get -y install jq ca-certificates cmake g++ gcc git libx11-dev libffi-dev libnss3-tools locales make libarchive-tools latexmk texlive-latex-recommended texlive-latex-extra \
+    texlive texlive-xetex texlive-lang-european texlive-fonts-recommended texlive-fonts-extra inkscape netcat-traditional ruby ruby-dev sudo libsystemd-dev golang vim cups-ipp-utils binutils \
+    google-chrome-unstable postgresql-16 postgresql-contrib-16 postgresql-server-dev-16 && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     locale-gen && \
