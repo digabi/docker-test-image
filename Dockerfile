@@ -25,7 +25,7 @@ RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     adduser --system --uid 1001 --shell /bin/bash digabi
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
-    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 14.16.0 16.14.0 18.17.0; do nvm install $v; nvm exec $v npm install -g yarn; done'
+    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 18.17.0 22.12.0; do nvm install $v; done'
 
 RUN gem install fpm
 
@@ -33,7 +33,7 @@ RUN gem install fpm
 # https://github.com/microsoft/playwright/blob/main/utils/docker/Dockerfile.focal
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright-agent
 RUN mkdir /ms-playwright-agent && \
-    export PATH=$PATH:/home/digabi/.nvm/versions/node/v16.14.0/bin && \
+    export PATH=$PATH:/home/digabi/.nvm/versions/node/v22.12.0/bin && \
     cd /ms-playwright-agent && npm init -y && \
     npm i playwright && \
     npx playwright install --with-deps && \
