@@ -25,7 +25,7 @@ RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     adduser --system --uid 1001 --shell /bin/bash digabi
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
-    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 14.16.0 16.14.0 18.17.0; do nvm install $v; nvm exec $v npm install -g yarn; done'
+    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 18.17.0 22.12.0; do nvm install $v; done'
 
 RUN gem install fpm
 
