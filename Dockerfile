@@ -1,12 +1,16 @@
-FROM --platform=linux/amd64 debian:11.5
+FROM --platform=linux/amd64 debian:12.9
+
+RUN mkdir -p /home/digabi
+RUN adduser --system --uid 1001 --home /home/digabi --shell /bin/bash digabi
+RUN chown digabi /home/digabi
 
 RUN apt-get update && apt-get -y install gnupg curl && \
     curl 'https://dl-ssl.google.com/linux/linux_signing_key.pub' | apt-key add - && \
     echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
-    echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/stretch-backports.list && \
+    echo 'deb http://deb.debian.org/debian bookworm-backports main' > /etc/apt/sources.list.d/bookworm-backports.list && \
     install -d /usr/share/postgresql-common/pgdg && \
     curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc && \
-    echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt bullseye-pgdg main' > /etc/apt/sources.list.d/pgdg.list
+    echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main' > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update && \
     apt-get -y install jq ca-certificates cmake g++ gcc git libx11-dev libffi-dev libnss3-tools locales make libarchive-tools latexmk texlive-latex-recommended texlive-latex-extra \
@@ -21,8 +25,7 @@ RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     echo "TimeZone = 'Europe/Helsinki'" >> /etc/postgresql/16/main/postgresql.conf && \
     pg_ctlcluster 16 main start && \
     sudo -u postgres psql -c 'CREATE USER digabi WITH SUPERUSER;' && \
-    pg_ctlcluster 16 main stop && \
-    adduser --system --uid 1001 --shell /bin/bash digabi
+    pg_ctlcluster 16 main stop
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
     sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 18.17.0 22.12.0; do nvm install $v; done'
