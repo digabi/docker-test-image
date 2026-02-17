@@ -28,7 +28,7 @@ RUN echo 'fi_FI.UTF-8 UTF-8' > /etc/locale.gen && \
     pg_ctlcluster 16 main stop
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sudo -u digabi bash && \
-    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 18.17.0 22.12.0; do nvm install $v; done'
+    sudo -u digabi bash -c 'cd ; . ~/.nvm/nvm.sh; for v in 22.12.0 24.13.1; do nvm install $v; done'
 
 RUN gem install fpm
 
